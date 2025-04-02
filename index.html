@@ -2,98 +2,238 @@
 <html>
 <head>
 <style>
-#div1 {width:300px;height:300px;padding:10px;border:1px solid #aaaaaa;}
-
-#left
-{
-	border: 1px solid #aaaa;
-	width: 200px;
-	float: left
-	
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: -webkit-linear-gradient(90deg, #000000,#0d1521,#070e18);
+    background: linear-gradient(90deg, #000000,#0d1521,#070e18);
+    color: white;
+}
+#div1 {
+  width: 1000px;
+  height: 400px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+  position: relative;
+  background-color: white;
 }
 
-#right
-{
-	border: 1px solid #aaaa;
-	width: 200px;
-	float: right;
-	
+#left {
+  border: 1px solid #aaaa;
+  width: 200px;
+  float: left;
 }
-.selector
-{
-	width: 580px;
-	margin: auto;
+
+#right {
+  border: 1px solid #aaaa;
+  width: 200px;
+  float: right;
 }
-p
-{
-	font-size: 25px;
-	text-align: center;
+
+.selector {
+  width: 580px;
+  margin: auto;
+}
+
+p {
+  font-size: 25px;
+  text-align: center;
+}
+.selector{
+    border: 0px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 1500px;
+    margin-bottom: 50px;
+    background: -webkit-linear-gradient(90deg, #405758,#5e787b,#405758);background: linear-gradient(90deg, #405758,#5e787b,#405758);
+}
+.draggable-items{
+    border: 0px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: auto;
+}
+.draggable-items > button{
+    height: 50px;
+}
+.draggable-items > input{
+    height: 50px;
+}
+img{
+    height: 100px;
+}
+video{
+    height: 100px;
+}
+
+.editor{
+    border: 0px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    height: 700px;
+    width: 1500px;
+    justify-content: space-between;
+    background: -webkit-linear-gradient(90deg, #405758,#5e787b,#405758);
+    background: linear-gradient(90deg, #405758,#5e787b,#405758);
+    padding-bottom: 10px;
 }
 </style>
-<script>
-    let elementsHistory = [];
-    dropArea = document.getElementById('div1');
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-    elementsHistory.push(ev);
-    console.log(elementsHistory);
-}
-</script>
 </head>
 <body>
 <div class="selector">
-<div class="draggable-items">
+    <h1>Элементы для добавления</h1>
+  <div class="draggable-items">
     <p class="item" draggable="true" id="drag1" ondragstart="drag(event)">Приколюха</p>
     <button class="item" draggable="true" id="drag2" ondragstart="drag(event)">Кнопочка</button>
     <img src="oia-uia.png" alt="" class="item" draggable="true" id="drag3" ondragstart="drag(event)">
     <input type="text" name="" class="item" draggable="true" id="drag4" ondragstart="drag(event)">
     <div><input type="checkbox" name="" class="item" draggable="true" id="drag5" ondragstart="drag(event)"></div>
     <div class="item" draggable="true" id="drag6" ondragstart="drag(event)">
-        <input type="radio" name="1" id="1">
-        <input type="radio" name="1" id="1">
+      <input type="radio" name="1" id="1">
+      <input type="radio" name="1" id="1">
     </div>
     <div class="item" draggable="true" id="drag7" ondragstart="drag(event)" style="background-color: #aaaaaa; height: 100px; width: 100px;"></div>
     <a href="#" class="item" draggable="true" id="drag8" ondragstart="drag(event)">https://github.com/EverlastingAlice</a>
     <video src="https://www.shutterstock.com/shutterstock/videos/1054704035/preview/stock-footage-aerial-top-view-of-waves-break-on-rocks-in-a-blue-ocean-sea-waves-on-beautiful-beach-aerial-view.webm" class="item" draggable="true" id="drag9" ondragstart="drag(event)"></video>
     <progress class="item" draggable="true" id="drag10" ondragstart="drag(event)"></progress>
-</div>
+  </div>
 </div>
 
 <div class="editor">
-    <h3>Создайте открытку</h3>
-    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <button id="undo-btn">Отменить последнее действие</button>
-        <div class="text-tools">
-            <label for="font-size">Размер текста</label>
-            <input type="number" id="font-size" value="16" min="0" max="50">
-            <label for=""></label>
-            <input type="color" id="font-color" value="#000000">
-        </div>
+  <h1>Создайте открытку</h1>
+  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <button id="undo-btn">Отменить последнее действие</button>
+  <div class="text-tools">
+    <label for="add-text-input">Введите текст:</label>
+    <input type="text" id="add-text-input" placeholder="Введите текст">
+    <button id="add-text-btn">Добавить текст</button>
+    <br><br>
+    <label for="font-size">Размер текста:</label>
+    <input type="number" id="font-size" value="16" min="0" max="50">
+    <label for="font-color">Цвет текста:</label>
+    <input type="color" id="font-color" value="#000000">
+    <button id="apply-formatting-btn">Применить форматирование</button>
+  </div>
 </div>
 
 <script>
-    // кнопка отмены
-    const undoBtn = document.getElementById('undo-btn');
-    undoBtn.addEventListener('click', () => {
-        if (elementsHistory.length > 0) {
-            elementsHistory.pop();
-            console.log(elementsHistory);
-        }
-    });
+let elementsHistory = []; // Массив для хранения истории добавленных элементов
+let selectedTextElement = null; // Переменная для хранения выбранного текстового элемента
 
-    //форматирование текста
+// Drag-and-drop (оставляем вашу реализацию)
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+  elementsHistory.push(document.getElementById(data)); // Добавляем элемент в историю
+  console.log(elementsHistory);
+}
+
+// Кнопка отмены
+const undoBtn = document.getElementById('undo-btn');
+undoBtn.addEventListener('click', () => {
+  if (elementsHistory.length > 0) {
+    const lastElement = elementsHistory.pop(); // Удаляем последний элемент из истории
+    lastElement.remove(); // Удаляем элемент из DOM
+    console.log("Удален элемент:", lastElement);
+    console.log("Обновленная история элементов:", elementsHistory);
+  } else {
+    alert("Нет элементов для отмены!"); // Сообщение, если история пуста
+  }
+});
+
+// Добавление текста
+const addTextBtn = document.getElementById('add-text-btn');
+const addTextInput = document.getElementById('add-text-input');
+
+addTextBtn.addEventListener('click', () => {
+  const text = addTextInput.value.trim(); // Получаем текст из поля ввода
+  if (!text) {
+    alert("Введите текст перед добавлением!"); // Сообщение, если текст пустой
+    return;
+  }
+
+  // Создаем новый текстовый элемент
+  const textElement = document.createElement('p');
+  textElement.textContent = text;
+  textElement.style.position = "absolute";
+  textElement.style.color = "#000000"; // Черный цвет текста
+  textElement.style.zIndex = "10"; // Убедитесь, что текст выше других элементов
+
+  // Добавляем возможность перетаскивания текстовому элементу
+  textElement.setAttribute("draggable", true);
+  textElement.addEventListener("dragstart", drag);
+
+  // Получаем размеры области #div1
+  const dropArea = document.getElementById('div1');
+  const dropAreaRect = dropArea.getBoundingClientRect();
+
+  // Генерируем случайные координаты внутри области #div1
+  const randomLeft = Math.random() * (dropAreaRect.width - 100); // Оставляем отступ справа
+  const randomTop = Math.random() * (dropAreaRect.height - 50); // Оставляем отступ снизу
+
+  // Задаем координаты текстового элемента
+  textElement.style.left = `${randomLeft}px`;
+  textElement.style.top = `${randomTop}px`;
+
+  // Добавляем текстовый элемент в область drop
+  dropArea.appendChild(textElement);
+
+  // Добавляем элемент в историю для функции отмены
+  elementsHistory.push(textElement);
+  console.log("Добавлен текстовый элемент:", textElement);
+  console.log("Текущая история элементов:", elementsHistory);
+
+  // Очищаем поле ввода
+  addTextInput.value = "";
+});
+
+// Выбор текстового элемента
+document.getElementById('div1').addEventListener('click', (event) => {
+  if (event.target.tagName === 'P') {
+    selectedTextElement = event.target; // Сохраняем выбранный текстовый элемент
+    alert("Текст выбран для форматирования!"); // Сообщение о выборе
+  } else {
+    alert("Выберите текстовый элемент для форматирования!"); // Сообщение, если кликнули не на текст
+  }
+});
+
+// Применение форматирования
+const applyFormattingBtn = document.getElementById('apply-formatting-btn');
+const fontSizeInput = document.getElementById('font-size');
+const fontColorInput = document.getElementById('font-color');
+
+applyFormattingBtn.addEventListener('click', () => {
+  if (!selectedTextElement) {
+    alert("Нечего форматировать! Выберите текстовый элемент."); // Сообщение, если нет выбранного текста
+    return;
+  }
+
+  // Применяем размер текста
+  selectedTextElement.style.fontSize = `${fontSizeInput.value}px`;
+
+  // Применяем цвет текста
+  selectedTextElement.style.color = fontColorInput.value;
+
+  alert("Форматирование применено!"); // Сообщение об успешном форматировании
+});
 </script>
 </body>
 </html>
-
