@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#div1 {width:300px;height:300px;padding:10px;border:1px solid #aaaaaa;}
+
+#left
+{
+	border: 1px solid #aaaa;
+	width: 200px;
+	float: left
+	
+}
+
+#right
+{
+	border: 1px solid #aaaa;
+	width: 200px;
+	float: right;
+	
+}
+.selector
+{
+	width: 580px;
+	margin: auto;
+}
+p
+{
+	font-size: 25px;
+	text-align: center;
+}
+</style>
+<script>
+    let elementsHistory = [];
+    dropArea = document.getElementById('div1');
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+    elementsHistory.push(ev);
+    console.log(elementsHistory);
+}
+</script>
+</head>
+<body>
+<div class="selector">
+<div class="draggable-items">
+    <p class="item" draggable="true" id="drag1" ondragstart="drag(event)">Приколюха</p>
+    <button class="item" draggable="true" id="drag2" ondragstart="drag(event)">Кнопочка</button>
+    <img src="oia-uia.png" alt="" class="item" draggable="true" id="drag3" ondragstart="drag(event)">
+    <input type="text" name="" class="item" draggable="true" id="drag4" ondragstart="drag(event)">
+    <div><input type="checkbox" name="" class="item" draggable="true" id="drag5" ondragstart="drag(event)"></div>
+    <div class="item" draggable="true" id="drag6" ondragstart="drag(event)">
+        <input type="radio" name="1" id="1">
+        <input type="radio" name="1" id="1">
+    </div>
+    <div class="item" draggable="true" id="drag7" ondragstart="drag(event)" style="background-color: #aaaaaa; height: 100px; width: 100px;"></div>
+    <a href="#" class="item" draggable="true" id="drag8" ondragstart="drag(event)">https://github.com/EverlastingAlice</a>
+    <video src="https://www.shutterstock.com/shutterstock/videos/1054704035/preview/stock-footage-aerial-top-view-of-waves-break-on-rocks-in-a-blue-ocean-sea-waves-on-beautiful-beach-aerial-view.webm" class="item" draggable="true" id="drag9" ondragstart="drag(event)"></video>
+    <progress class="item" draggable="true" id="drag10" ondragstart="drag(event)"></progress>
+</div>
+</div>
+
+<div class="editor">
+    <h3>Создайте открытку</h3>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <button id="undo-btn">Отменить последнее действие</button>
+        <div class="text-tools">
+            <label for="font-size">Размер текста</label>
+            <input type="number" id="font-size" value="16" min="0" max="50">
+            <label for=""></label>
+            <input type="color" id="font-color" value="#000000">
+        </div>
+</div>
+
+<script>
+    // кнопка отмены
+    const undoBtn = document.getElementById('undo-btn');
+    undoBtn.addEventListener('click', () => {
+        if (elementsHistory.length > 0) {
+            elementsHistory.pop();
+            console.log(elementsHistory);
+        }
+    });
+
+    //форматирование текста
+</script>
+</body>
+</html>
+
